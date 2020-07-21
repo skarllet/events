@@ -1,4 +1,4 @@
-const create = process => {
+const create = () => {
   const events = {};
 
   const callEventHandlers = (event, payload, replace = null) => {
