@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --watch"
   },
   "repository": {
     "type": "git",
@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/skarllet/events/issues"
   },
-  "homepage": "https://github.com/skarllet/events#readme"
+  "homepage": "https://github.com/skarllet/events#readme",
+  "devDependencies": {
+    "jest": "^26.1.0"
+  }
 }

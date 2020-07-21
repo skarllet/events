@@ -1,22 +1,16 @@
-const {serializeError, deserializeError} = require('serialize-error');
-
-const isError = obj => !!(obj && obj.stack && obj.message)
-const handlePayloadSerialization = payload => isError(payload) ? serializeError(payload) : payload
-const handlePayloadDeserialization = payload => isError(payload) ? deserializeError(payload) : payload
-
 const create = process => {
-  if (!process)
-    throw new Error('No process atatched!')
-
   const events = {};
 
-  const callEventHandlers = (event, payload, id, sourceEvent = null) => {
-    if (events[event])
-      for (const handler of events[event])
-        handler(handlePayloadDeserialization(payload), id, sourceEvent || event)
+  const callEventHandlers = (event, payload, replace = null) => {
+    if (events[replace || event])
+      for (const handler of events[replace || event])
+        handler({ event, payload })
   }
 
-  const emmit = (event, payload = null, id = null) => process.send({ event, payload: handlePayloadSerialization(payload), id })
+  const emmit = (event, payload = null) => {
+    callEventHandlers(event, payload)
+    callEventHandlers(event, payload, '*')
+  }
 
   const remove = (event, handler) => {
     if (!events[event])
@@ -34,26 +28,7 @@ const create = process => {
     events[event].push(handler)
   }
 
-  const once = (event, handler, id = null) => {
-    const fn = (_payload, _id) => {
-      if (id && _id !== id)
-        return
-
-      handler(_payload, _id)
-      remove(event, fn)
-    }
-
-    on(event, fn)
-  }
-
-  // Listens for messages from process
-  process.on('message', ({ event, payload, id }) => {
-    // Handle all events
-    callEventHandlers('*', payload, id, event)
-    callEventHandlers(event, payload, id)
-  })
-
-  return { emmit, on, once, remove }
+  return { emmit, on, remove }
 }
 
 module.exports = { create }
