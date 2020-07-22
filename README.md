@@ -9,7 +9,7 @@ A tiny library to create a event listener and emmiter to be used in all *@skarll
 ### Usage
 
     // Import the module
-    const { emmit, on } = require('@skarllet/events')
+    const { emmit, on } = require('@skarllet/events').create()
     
     // Create an event listener
     on('foo', ({ event, payload }) => {
