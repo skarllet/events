@@ -11,7 +11,7 @@
     "type": "git",
     "url": "git+https://github.com/skarllet/events.git"
   },
-  "keywords": [],
+  "keywords": [ "events", "event", "emmiter", "emmit", "listener", "on" ],
   "author": "",
   "license": "ISC",
   "bugs": {
