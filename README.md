@@ -20,7 +20,7 @@ A tiny library to create a event listener and emmiter to be used in all *@skarll
       console.log(payload) // prints the data sended to the event
     })
 
-    // Creates avent listener that listens to all events
+    // Creates a event listener that listens to all events emmited
     on('*', (payload, event) => {
       console.log(event) // prints te event
       console.log(payload) // prints the data sended to the event
