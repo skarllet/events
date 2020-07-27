@@ -16,9 +16,9 @@ describe('eventbuzz', () => {
 
       const { on, emmit } = events.create();
       const event = 'event:foo';
-      on(event, data => {
-        expect(data).toHaveProperty('event')
-        expect(data).toHaveProperty('payload')
+      on(event, (event, payload) => {
+        expect(event !== undefined).toBeTruthy()
+        expect(payload !== undefined).toBeTruthy()
         done()
       })
 
@@ -32,7 +32,7 @@ describe('eventbuzz', () => {
       const event = 'event:foo';
       const payload = 'bar'
 
-      on(event, ({ payload: recievedPayload }) => {
+      on(event, (recievedPayload) => {
         expect(recievedPayload).toMatch(payload)
         done()
       })

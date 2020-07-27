@@ -4,7 +4,7 @@ const create = () => {
   const callEventHandlers = (event, payload, replace = null) => {
     if (events[replace || event])
       for (const handler of events[replace || event])
-        handler({ event, payload })
+        handler(payload, event)
   }
 
   const emmit = (event, payload = null) => {
