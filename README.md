@@ -15,13 +15,13 @@ A tiny library to create a event listener and emmiter to be used in all *@skarll
     const { emmit, on } = events.create()
 
     // Create an event listener
-    on('foo', ({ event, payload }) => {
+    on('foo', (payload, event) => {
       console.log(event) // prints foo
       console.log(payload) // prints the data sended to the event
     })
 
     // Creates avent listener that listens to all events
-    on('*', ({ event, payload }) => {
+    on('*', (payload, event) => {
       console.log(event) // prints te event
       console.log(payload) // prints the data sended to the event
     })
